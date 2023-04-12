@@ -14,8 +14,8 @@ class Action:
     
     def __init__(self, nom:str, etat_initial:Etat, mouvements:list[Mouvement], recompense:float|int):
         # filtres
-        if sum([mouvement.probabilite for mouvement in mouvements]) != 1:
-            raise ValueError(f"Création de l'action {nom} impossible : la somme des probabilités est != 1")
+        if not (0.9999999 <= sum([mouvement.probabilite for mouvement in mouvements]) <= 1.000000001):
+            raise ValueError(f"Création de l'action {nom} impossible : la somme des probabilités est != 1 ({sum([mouvement.probabilite for mouvement in mouvements])})")
         
         self.nom = nom
         self.etat_initial = etat_initial
@@ -25,8 +25,10 @@ class Action:
     def tirer_etat(self):
         etats = [mouvement.etat_final for mouvement in self.mouvements]
         probabilites = [mouvement.probabilite for mouvement in self.mouvements]
-        
-        return rd.choices(etats, weights=probabilites)
+        return rd.choices(etats, weights=probabilites)[0]
     
-    def consommer(self) -> tuple(Etat, float):
+    def consommer(self) -> tuple:
         return (self.tirer_etat(), self.recompense)
+    
+    def __str__(self):
+        return self.nom
