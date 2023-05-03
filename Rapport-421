@@ -1,3 +1,26 @@
+Un rapport qui présente votre travail :
+▪ le modèle choisi pour représenter le problème avec justifications
+▪ les difficultés rencontrées, les choix pris, les fonctionnalités non-réussites et les raisons ...
+▪ vos réponses aux questions théoriques mentionnées dans l'énoncé du sujet choisi.
+
+Mission 1 : Modèle et implémentation
+Vous allez dans un premier temps, modéliser et implémenter ce problème/jeu : 
+quels sont les variables d'état et les domaines de chaque variable, l'ensemble d'action possible,
+l'oracle qui guidera l'apprentissage (retour d'état s′ de transition et de récompense r pour un couple état, action (s, a))
+
+
+
+Mission 2 : Apprentissage
+Vous allez appliquer l'algorithme Q-learning (déjà implémenté en TP2) 
+afin d'apprendre une politique qui guidera les décisions de l'agent joueur IA.
+
+Mission 3 : Analyse
+Affichage de résultat d'analyse sur :
+• la complexité de votre modèle de représentation,
+• le nombre d'itérations (épisode) pour arriver à une politique optimale ou acceptable, • statistiques sur les gains
+
+
+
 Présentation du Projet 421 : 
 
 Présentation du Modèle :  
@@ -11,4 +34,8 @@ Kilian :
 Hélène :  
  
  
-Aller plus loin 
+Aller plus loin :  
+Comment modifierez vous votre modèle proposé (que modèle, implémentation non obligatoire) 
+pour rendre la version plus proche du jeu réel : un dès gardé ne peut pas être relancé ? 
+Est-ce que cela augmentera ou diminuera votre espace d'état (le nombre d'états possible) ? Diminution du nombre d'état
+Est-ce que cela compliquera la phase d'apprentissage ? Justifiez vos réponses. Facilitant. 
