@@ -9,6 +9,9 @@ class Mouvement:
             self.probabilite = probabilite
         else:
             raise ValueError("Création de mouvement impossible : la probabilité doit être dans l'intervalle ]0,1]")
+        
+    def __str__(self):
+        return self.etat_final.__str__() + " " + str(self.probabilite)
 
 class Action:
     
