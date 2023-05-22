@@ -41,6 +41,8 @@ class Agent:
         
         if tmp_valeur > self.etat_courant.valeur:
             self.etat_courant.valeur = tmp_valeur
+            
+        self.etat_courant = etat_arrive
         print(self.memoire)
         return True
             
