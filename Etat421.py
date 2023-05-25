@@ -127,7 +127,7 @@ class Etat421(Etat):
         # relancer 1 de
         for i in range(len(self.des)):
             de_garde1 = self.des[i]
-            for j in range(len(self.des)):
+            for j in range(i, len(self.des)):
                 if i == j:
                     continue
                 de_garde2 = self.des[j]

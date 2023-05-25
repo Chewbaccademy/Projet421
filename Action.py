@@ -39,3 +39,6 @@ class Action:
     
     def __str__(self):
         return self.nom
+    
+    def info(self):
+        return str(self) + " " + str(self.recompense)

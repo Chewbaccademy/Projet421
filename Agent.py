@@ -21,9 +21,9 @@ class Agent:
     def simuler(self, n_simulation:int):
         for i in range(n_simulation):
             self.etat_courant = self.depart
+            print("\nSimulation n° %i:" % (i+1))
             for j in range(3):
                 self.transiter()
-            self.tx_exploration *= 0.9
         
     def explorer(self) -> bool:
         print("explore")
@@ -46,16 +46,22 @@ class Agent:
         self.etat_courant = etat_arrive
         return True
             
+    def print_action_info(self, action:Action):
+        if self.etat_courant.nom not in self.memoire or action.nom not in self.memoire[self.etat_courant.nom]:
+            return action.info()
+        
+        return "%s %s" % (action.nom, self.memoire[self.etat_courant.nom][action.nom])
             
     def exploiter(self) -> bool:
         print("exploite", self.etat_courant)
         actions_etats = [action for action in self.environnement.liste_actions if action.etat_initial == self.etat_courant]
-        print(self.etat_courant.nom, [str(x) for x in actions_etats])
+        print(self.etat_courant.nom, [self.print_action_info(x) for x in actions_etats])
         actions_possibles:list[Action] = [action for action in actions_etats if self.etat_courant.nom in self.memoire and action.nom in self.memoire[self.etat_courant.nom]]
-        print([str(x) for x in actions_possibles])
+        print([x.info() for x in actions_possibles])
         if actions_possibles == []:
             return False
         action_entreprise = self.trouver_meilleure_action(actions_possibles)
+        print(action_entreprise)
         etat_arrive, _ = action_entreprise.consommer()
         self.etat_courant = etat_arrive
         print(etat_arrive)

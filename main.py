@@ -28,6 +28,6 @@ joueur = Agent(
                 , tx_apprentissage=0.9
                 , tx_exploration=0.9
                 ,facteur_attenuation=0.1)
-joueur.simuler(100)
+joueur.simuler(1000)
 
 
