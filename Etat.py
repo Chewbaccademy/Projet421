@@ -17,11 +17,48 @@ class DiceSet:
     def append(self, other):
         self.dices.append(other)
         
-    def __eq__(self, __value:object) -> bool:
-        if __value is not None and isinstance(__value, self.__class__()):
-            return sorted(self.dices) == sorted(__value.dices)
+    def __len__(self):
+        return len(self.dices)
+    
+    def __contains__(self, other):
+        if not isinstance(other, DiceSet):
+            return False
         
+        serial_self = ''.join([str(x) for x in sorted(self.dices)])
+        serial_other = ''.join([str(x) for x in sorted(other.dices)])
+        
+        return serial_other in serial_self
+    
+    def __sub__(self, other):
+        new_set = self.copy()
+        for dice in other.dices:
+            new_set.dices.remove(dice)
+            
+        return new_set
+        
+    def __eq__(self, __value:object) -> bool:
+        if __value is not None and type(__value) == type(self):
+            return sorted(self.dices) == sorted(__value.dices)
         return False
+    
+    def __tuple__(self):
+        return tuple(self.dices)
+    
+    def __str__(self):
+        return str(self.dices)
+    
+    
+    def __iter__(self):
+        return (dice for dice in self.dices)
+    
+    def __next__(self):
+        return next(self.dices)
+    
+    def __getitem__(self, item):
+         return self.dices[item]
+    
+    def copy(self):
+        return DiceSet(*self.dices)
     
     def max_same_value(self):
         previous_value = None
@@ -40,14 +77,4 @@ class DiceSet:
         
         return max_same
     
-class Etat421(Etat):
-    
-    def __init__(self, de1:int, de2:int, de3:int, valeur:float):
-        name = str(de1) + "-" + str(de2) + "-" +  str(de3)
-        super(self).__init__(name, valeur)
-        self.des = DiceSet(de1, de2, de3)
-        
-    def __eq__(self, __value: object) -> bool:
-        if __value is not None and isinstance(__value, self.__class__()):
-             return self.des == __value.des
-        return False
+

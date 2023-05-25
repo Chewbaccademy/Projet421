@@ -17,8 +17,12 @@ class Action:
     
     def __init__(self, nom:str, etat_initial:Etat, mouvements:list[Mouvement], recompense:float|int):
         # filtres
-        if not (0.9999999 <= sum([mouvement.probabilite for mouvement in mouvements]) <= 1.000000001):
-            raise ValueError(f"Création de l'action {nom} impossible : la somme des probabilités est != 1 ({sum([mouvement.probabilite for mouvement in mouvements])})")
+        if sum([mouvement.probabilite for mouvement in mouvements]) != 1:
+            coef = 1/sum([mouvement.probabilite for mouvement in mouvements])
+            for i in range(len(mouvements)):
+                mouvements[i].probabilite = mouvements[i].probabilite * coef
+            if not (0.9999 <= sum([mouvement.probabilite for mouvement in mouvements]) <= 1.00001):
+                raise ValueError(f"Création de l'action {nom} impossible : la somme des probabilités est != 1 ({sum([mouvement.probabilite for mouvement in mouvements])})")
         
         self.nom = nom
         self.etat_initial = etat_initial

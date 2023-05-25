@@ -1,170 +1,32 @@
 from Action import Action, Mouvement
 from Agent import Agent
-from Etat import Etat, Etat421
+from Etat421 import Etat, EtatsList
 from Environnement import Environnement
 import math as m
 
 
 ei= Etat("Init", 0)
-e1 = Etat421(4,2,1, 800)
-e2 = Etat421(1,1,1, 700)
-e3 = Etat421(1,1,6, 406)
-e4 = Etat421(1,1,5, 405)
-e5 = Etat421(1,1,4, 404)
-e6 = Etat421(1,1,3, 403)
-e7 = Etat421(1,1,2, 402)
-e8 = Etat421(6,6,6, 306)
-e9 = Etat421(5,5,5, 303)
-e10 = Etat421(4,4,4, 304)
-e11 = Etat421(3,3,3, 303)
-e12 = Etat421(2,2,2, 302)
-e13 = Etat421(1,2,3, 203)
-e14 = Etat421(2,3,4, 204)
-e15 = Etat421(3,4,5, 205)
-e16 = Etat421(4,5,6, 206)
-e17 = Etat421(2,2,1, 0)
-e18 = Etat421(6,1,2, 106)
-e19 = Etat421(6,1,3, 106)
-e20 = Etat421(6,1,4, 106)
-e21 = Etat421(6,1,5, 106)
-e22 = Etat421(6,1,6, 106)
-e23 = Etat421(6,2,2, 106)
-e24 = Etat421(6,2,3, 106)
-e25 = Etat421(6,2,4, 106)
-e26 = Etat421(6,2,5, 106)
-e27 = Etat421(6,2,6, 106)
-e28 = Etat421(6,3,3, 106)
-e29 = Etat421(6,4,3, 106)
-e30 = Etat421(6,5,3, 106)
-e31 = Etat421(6,6,3, 106)
-e32 = Etat421(6,4,4, 106)
-e33 = Etat421(6,4,6, 106)
-e34 = Etat421(6,5,5, 106)
-e35 = Etat421(6,5,6, 106)
-e36 = Etat421(5,5,4, 105)
-e37 = Etat421(5,5,3, 105)
-e38 = Etat421(5,5,2, 105)
-e39 = Etat421(5,5,1, 105)
-e40 = Etat421(5,4,2, 105)
-e41 = Etat421(5,4,1, 105)
-e42 = Etat421(5,3,3, 105)
-e43 = Etat421(5,3,2, 105)
-e44 = Etat421(5,3,1, 105)
-e45 = Etat421(5,2,2, 105)
-e46 = Etat421(5,2,1, 105)
-e47 = Etat421(4,4,3, 104)
-e48 = Etat421(4,4,2, 104)
-e49 = Etat421(4,4,1, 104)
-e50 = Etat421(4,3,3, 104)
-e51 = Etat421(4,3,1, 104)
-e52 = Etat421(4,2,2, 104)
-e53 = Etat421(3,3,2, 103)
-e54 = Etat421(3,3,1, 103)
-e55 = Etat421(3,2,2, 103)
+etatL = EtatsList()
+lst_etats = etatL.lst_etats
 
 
+lst_movt = []
+for e in lst_etats:
+    lst_movt.append(Mouvement(e, e.probabilite_avoir_etat()))
+print([str(m) for m in lst_movt])
+lst_actions = [Action("f:Init-t:RA", ei, lst_movt, 1)]
+for e in lst_etats:
+    lst_actions += e.genere_actions(lst_etats)
+print([str(m) for m in lst_actions])
 
-lst_etat = [e1,e2,e3,e4,e5,e6,e7,e8,e9,e10,e11,e12,e13,e14,e15,e16,e17,e18,e19,e20,e21, e22, e23, e24, e25, e26, e27, e28, e29, e30, e31, e31, e32, e33, e34, e35, e36, e37, e38, e39, e40, e41, e42, e43, e44, e45, e46, e47, e48, e49, e50, e51, e52, e53, e54, e55]
-
-
-lst_mouvements = []
-
-for index, etat in enumerate(lst_etat):
-    prob_3_de = (6 / m.factorial(etat.des.max_same_value())) / 216
-    prob_2_de = (6 / m.factorial(etat.des.max_same_value(1))) / 216
-    prob_1_de = (6 / m.factorial(etat.des.max_same_value(2))) / 216
-    lst_mouvements += Mouvement(etat, prob_3_de)
-
-print([str(x[0]) for x in lst_mouvements])
-
-actionInitiale = Action("La", ei, [x[0] for x in lst_mouvements], 1)
-a1 = Action("1G", e1, [Mouvement(e1, 1)], 0)
-a2 = Action("1La", e1, [x[0] for x in lst_mouvements], -1)
-a3 = Action("1L1", e1, [x[1] for x in lst_mouvements if "1" in x[1].etat_final.nom], -1)
-a4 = Action("2G", e2, [Mouvement(e2, 1)], 0)
-a5 = Action("2La", e2, [x[0] for x in lst_mouvements], -1)
-a6 = Action("2L1", e2, [x[1] for x in lst_mouvements if "2" in x[1].etat_final.nom], -1)
-a7 = Action("2L2", e2, [x[1] for x in lst_mouvements if "1" in x[1].etat_final.nom], -1)
-a8 = Action("2G", e3, [Mouvement(e2, 1)], 0)
-a9 = Action("2La", e3, [x[0] for x in lst_mouvements], -1)
-a10 = Action("2L1", e3, [x[1] for x in lst_mouvements if "3" in x[1].etat_final.nom], -1)
-a11 = Action("2L2", e3, [x[1] for x in lst_mouvements if "1" in x[1].etat_final.nom], -1)
-a12 = Action("2G", e4, [Mouvement(e4, 1)], 0)
-a13 = Action("2La", e4, [x[0] for x in lst_mouvements], -1)
-a14 = Action("2L1", e4, [x[1] for x in lst_mouvements if "4" in x[1].etat_final.nom], -1)
-a15 = Action("2L2", e4, [x[1] for x in lst_mouvements if "1" in x[1].etat_final.nom], -1)
-a16 = Action("2G", e5, [Mouvement(e5, 1)], 0)
-a17 = Action("2La", e5, [x[0] for x in lst_mouvements], -1)
-a18 = Action("2L1", e5, [x[1] for x in lst_mouvements if "5" in x[1].etat_final.nom], -1)
-a19 = Action("2L2", e5, [x[1] for x in lst_mouvements if "1" in x[1].etat_final.nom], -1)
-a20 = Action("2G", e6, [Mouvement(e6, 1)], 0)
-a21 = Action("2La", e6, [x[0] for x in lst_mouvements], -1)
-a22 = Action("2L1", e6, [x[1] for x in lst_mouvements if "6" in x[1].etat_final.nom], -1)
-a23 = Action("2L2", e6, [x[1] for x in lst_mouvements if "1" in x[1].etat_final.nom], -1)
-a24 = Action("2G", e7, [Mouvement(e7, 1)], 0)
-a25 = Action("2La", e7, [x[0] for x in lst_mouvements], -1)
-a26 = Action("2L2", e7, [x[1] for x in lst_mouvements if "2" in x[1].etat_final.nom], -1)
-a27 = Action("2G", e8, [Mouvement(e8, 1)], 0)
-a28 = Action("2La", e8, [x[0] for x in lst_mouvements], -1)
-a29 = Action("2L3", e8, [x[1] for x in lst_mouvements if "2" in x[1].etat_final.nom], -1)
-a30 = Action("2L2", e8, [x[1] for x in lst_mouvements if "3" in x[1].etat_final.nom], -1)
-a31 = Action("2G", e9, [Mouvement(e9, 1)], 0)
-a32 = Action("2La", e9, [x[0] for x in lst_mouvements], -1)
-a33 = Action("2L4", e9, [x[1] for x in lst_mouvements if "2" in x[1].etat_final.nom], -1)
-a34 = Action("2L2", e9, [x[1] for x in lst_mouvements if "4" in x[1].etat_final.nom], -1)
-a35 = Action("2G", e10, [Mouvement(e10, 1)], 0)
-a36 = Action("2La", e10, [x[0] for x in lst_mouvements], -1)
-a37 = Action("2L5", e10, [x[1] for x in lst_mouvements if "2" in x[1].etat_final.nom], -1)
-a38 = Action("2L2", e10, [x[1] for x in lst_mouvements if "5" in x[1].etat_final.nom], -1)
-a39 = Action("2G", e11, [Mouvement(e11, 1)], 0)
-a40 = Action("2La", e11, [x[0] for x in lst_mouvements], -1)
-a41 = Action("2L6", e11, [x[1] for x in lst_mouvements if "2" in x[1].etat_final.nom], -1)
-a42 = Action("2L2", e11, [x[1] for x in lst_mouvements if "6" in x[1].etat_final.nom], -1)
-a43 = Action("2G", e12, [Mouvement(e12, 1)], 0)
-a44 = Action("2La", e12, [x[0] for x in lst_mouvements], -1)
-a45 = Action("2L1", e12, [x[1] for x in lst_mouvements if "2" in x[1].etat_final.nom], -1)
-a46 = Action("2L2", e12, [x[1] for x in lst_mouvements if "1" in x[1].etat_final.nom], -1)
-a47 = Action("3G", e13, [Mouvement(e13, 1)], 0)
-a48 = Action("3La", e13, [x[0] for x in lst_mouvements], -1)
-a49 = Action("3L3", e13, [x[1] for x in lst_mouvements if "3" in x[1].etat_final.nom], -1)
-a50 = Action("3G", e14, [Mouvement(e14, 1)], 0)
-a51 = Action("3La", e14, [x[0] for x in lst_mouvements], -1)
-a52 = Action("3L4", e14, [x[1] for x in lst_mouvements if "3" in x[1].etat_final.nom], -1)
-a53 = Action("3L3", e14, [x[1] for x in lst_mouvements if "4" in x[1].etat_final.nom], -1)
-a54 = Action("3G", e15, [Mouvement(e15, 1)], 0)
-a55 = Action("3La", e15, [x[0] for x in lst_mouvements], -1)
-a56 = Action("3L5", e15, [x[1] for x in lst_mouvements if "5" in x[1].etat_final.nom], -1)
-a57 = Action("3L3", e15, [x[1] for x in lst_mouvements if "3" in x[1].etat_final.nom], -1)
-a58 = Action("3G", e16, [Mouvement(e16, 1)], 0)
-a59 = Action("3La", e16, [x[0] for x in lst_mouvements], -1)
-a60 = Action("3L6", e16, [x[1] for x in lst_mouvements if "3" in x[1].etat_final.nom], -1)
-a61 = Action("3L3", e16, [x[1] for x in lst_mouvements if "6" in x[1].etat_final.nom], -1)
-a62 = Action("4G", e17, [Mouvement(e17, 1)], 0)
-a63 = Action("4La", e17, [x[0] for x in lst_mouvements], -1)
-a64 = Action("4L4", e17, [x[1] for x in lst_mouvements if "4" in x[1].etat_final.nom], -1)
-a65 = Action("4G", e18, [Mouvement(e18, 1)], 0)
-a66 = Action("4La", e18, [x[0] for x in lst_mouvements], -1)
-a67 = Action("4L5", e18, [x[1] for x in lst_mouvements if "4" in x[1].etat_final.nom], -1)
-a68 = Action("4L4", e18, [x[1] for x in lst_mouvements if "5" in x[1].etat_final.nom], -1)
-a69 = Action("5G", e19, [Mouvement(e19, 1)], 0)
-a70 = Action("5La", e19, [x[0] for x in lst_mouvements], -1)
-a71 = Action("5L5", e19, [x[1] for x in lst_mouvements if "5" in x[1].etat_final.nom], -1)
-a72 = Action("5G", e20, [Mouvement(e20, 1)], 0)
-a73 = Action("5La", e20, [x[0] for x in lst_mouvements], -1)
-a74 = Action("5L6", e20, [x[1] for x in lst_mouvements if "5" in x[1].etat_final.nom], -1)
-a75 = Action("5L5", e20, [x[1] for x in lst_mouvements if "6" in x[1].etat_final.nom], -1)
-a76 = Action("6G", e21, [Mouvement(e21, 1)], 0)
-a77 = Action("6La", e21, [x[0] for x in lst_mouvements], -1)
-a78 = Action("6L6", e21, [x[1] for x in lst_mouvements if "6" in x[1].etat_final.nom], -1)
-
-env = Environnement([actionInitiale, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32, a33, a34, a35, a36, a37, a38, a39, a40, a41, a42, a43, a44, a45, a46, a47, a48, a49, a50, a51, a52, a53, a54, a55, a56, a57, a58, a59, a60, a61, a62, a63, a64, a65, a66, a67, a68, a69, a70, a71, a72, a73, a74, a75, a76, a77, a78])
+env = Environnement(lst_actions)
 
 joueur = Agent(
                 nom="Joe"
                 , environnement=env
                 , etat_initial=ei
                 , tx_apprentissage=0.9
-                , tx_exploration=0.5
+                , tx_exploration=0.9
                 ,facteur_attenuation=0.1)
 joueur.simuler(100)
 

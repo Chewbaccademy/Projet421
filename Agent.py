@@ -16,10 +16,14 @@ class Agent:
         self.tx_exploration = tx_exploration
         self.facteur_attenuation = facteur_attenuation
         self.memoire = dict()
+        self.depart = etat_initial
         
     def simuler(self, n_simulation:int):
         for i in range(n_simulation):
-            self.transiter()
+            self.etat_courant = self.depart
+            for j in range(3):
+                self.transiter()
+            self.tx_exploration *= 0.9
         
     def explorer(self) -> bool:
         print("explore")
@@ -37,18 +41,14 @@ class Agent:
             self.memoire[self.etat_courant.nom] = dict()
         
         if action_entreprise.nom not in self.memoire[self.etat_courant.nom]:
-            self.memoire[self.etat_courant.nom][action_entreprise.nom] = recompense
-        
-        if tmp_valeur > self.etat_courant.valeur:
-            self.etat_courant.valeur = tmp_valeur
+            self.memoire[self.etat_courant.nom][action_entreprise.nom] = tmp_valeur
             
         self.etat_courant = etat_arrive
-        print(self.memoire)
         return True
             
             
     def exploiter(self) -> bool:
-        print("exploite")
+        print("exploite", self.etat_courant)
         actions_etats = [action for action in self.environnement.liste_actions if action.etat_initial == self.etat_courant]
         print(self.etat_courant.nom, [str(x) for x in actions_etats])
         actions_possibles:list[Action] = [action for action in actions_etats if self.etat_courant.nom in self.memoire and action.nom in self.memoire[self.etat_courant.nom]]
@@ -58,6 +58,7 @@ class Agent:
         action_entreprise = self.trouver_meilleure_action(actions_possibles)
         etat_arrive, _ = action_entreprise.consommer()
         self.etat_courant = etat_arrive
+        print(etat_arrive)
         return True
         
     def transiter(self):
