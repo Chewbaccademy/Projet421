@@ -2,10 +2,7 @@ from Action import Action, Mouvement
 from Agent import Agent
 from Etat421 import Etat, EtatsList
 from Environnement import Environnement
-import math as m
 from matplotlib import pyplot as plt
-import seaborn as sns
-from collections import Counter
 
 
 ei= Etat("Init", 0)
