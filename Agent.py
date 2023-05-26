@@ -19,11 +19,14 @@ class Agent:
         self.depart = etat_initial
         
     def simuler(self, n_simulation:int):
+        score_list = []
         for i in range(n_simulation):
             self.etat_courant = self.depart
             print("\nSimulation n° %i:" % (i+1))
             for j in range(3):
-                self.transiter()
+                score = self.transiter()
+            score_list.append(score)
+        return score_list
         
     def explorer(self) -> bool:
         print("explore")
@@ -76,6 +79,8 @@ class Agent:
         else:
             if not self.exploiter():
                 self.explorer()
+                
+        return self.etat_courant.valeur
         
     def __filtrer_0_1(self, name:str, valeur:float):
         if not (0 <= valeur <= 1):

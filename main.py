@@ -3,6 +3,7 @@ from Agent import Agent
 from Etat421 import Etat, EtatsList
 from Environnement import Environnement
 import math as m
+from matplotlib import pyplot as plt
 
 
 ei= Etat("Init", 0)
@@ -28,6 +29,7 @@ joueur = Agent(
                 , tx_apprentissage=0.9
                 , tx_exploration=0.9
                 ,facteur_attenuation=0.1)
-joueur.simuler(1000)
-
+score_list = joueur.simuler(1000)
+plt.plot(score_list)
+plt.show()
 
