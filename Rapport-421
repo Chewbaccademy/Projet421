@@ -35,7 +35,15 @@ Présentation du Modèle :
  
  
 Problématique rencontrée  
- 
+
+Certaines difficultés rencontrées lors de l'implémentation d'un modèle pour le jeu du 421 peuvent inclure :
+
+1. Complexité des règles : Le jeu du 421 comporte plusieurs règles et combinaisons possibles, ce qui peut rendre la modélisation et l'implémentation du jeu plus complexes. Il peut être nécessaire de prendre en compte différentes combinaisons gagnantes et les contraintes liées au nombre de lancers autorisés.
+
+2. Gestion des actions : Les choix d'actions possibles peuvent varier en fonction de l'état actuel du jeu. 
+
+3. Modèle Probabiliste 
+
 Point de vue sur le projet:  
 Kilian :  
  
