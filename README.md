@@ -7,9 +7,9 @@ Pour lancer le projet, il suffit de se situer à la racine du projet et de lance
 
 ## Modifications des paramètres  
 Les paramètres tels que le facteur d'attenuation et le taux d'apprentissage de notre agent ont été fixés afin d'avoir la meilleure performance selon les tests que nous avons conduits :  
-![facteur attenuation optimal](./graphics/facteur_attenuation.png) ![taux apprentissage optimal](./graphics/taux_apprentissage.png)  
+![facteur attenuation optimal](./facteur_attenuation.png) ![taux apprentissage optimal](./taux_apprentissage.png)  
 Si toutefois vous souhaitez modifier les paramètres de notre agent, vous pouvez le faire dans le fichier *main.py*, à la ligne 24 :  
-![taux apprentissage optimal](./img/parametres.png) 
+![taux apprentissage optimal](./parametres.png) 
 
 ## Organisation du code  
 Notre algorithm est divisé en 4 objets :
