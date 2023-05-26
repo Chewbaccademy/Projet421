@@ -1,4 +1,4 @@
-from Etat import Etat
+from Etat import Etat, DiceSet
 import random as rd
 
 class Mouvement:
@@ -15,7 +15,7 @@ class Mouvement:
 
 class Action:
     
-    def __init__(self, nom:str, etat_initial:Etat, mouvements:list[Mouvement], recompense:float|int):
+    def __init__(self, nom:str, etat_initial:Etat, mouvements:list[Mouvement], recompense:float|int, des_gardes:DiceSet=None):
         # filtres
         if sum([mouvement.probabilite for mouvement in mouvements]) != 1:
             coef = 1/sum([mouvement.probabilite for mouvement in mouvements])
@@ -28,6 +28,7 @@ class Action:
         self.etat_initial = etat_initial
         self.mouvements = mouvements
         self.recompense = recompense
+        self.des_gardes = des_gardes
         
     def tirer_etat(self):
         etats = [mouvement.etat_final for mouvement in self.mouvements]

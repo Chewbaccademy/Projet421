@@ -4,6 +4,8 @@ from Etat421 import Etat, EtatsList
 from Environnement import Environnement
 import math as m
 from matplotlib import pyplot as plt
+import seaborn as sns
+from collections import Counter
 
 
 ei= Etat("Init", 0)
@@ -31,5 +33,8 @@ joueur = Agent(
                 ,facteur_attenuation=0.1)
 score_list = joueur.simuler(1000)
 plt.plot(score_list)
+plt.show()
+c = Counter(joueur.des_gardes)
+plt.bar(c.keys(), c.values())
 plt.show()
 

@@ -17,6 +17,7 @@ class Agent:
         self.facteur_attenuation = facteur_attenuation
         self.memoire = dict()
         self.depart = etat_initial
+        self.des_gardes = []
         
     def simuler(self, n_simulation:int):
         score_list = []
@@ -65,6 +66,8 @@ class Agent:
             return False
         action_entreprise = self.trouver_meilleure_action(actions_possibles)
         print(action_entreprise)
+        if 'G' in action_entreprise.nom:
+            self.des_gardes += action_entreprise.des_gardes.dices
         etat_arrive, _ = action_entreprise.consommer()
         self.etat_courant = etat_arrive
         print(etat_arrive)

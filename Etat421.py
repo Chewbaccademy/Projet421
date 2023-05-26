@@ -122,7 +122,7 @@ class Etat421(Etat):
             lst_movt = []
             for e in [etat for etat in lst_etats if DiceSet(de_garde) in etat.des]:
                 lst_movt.append(Mouvement(e, e.probabilite_avoir_etat(DiceSet(de_garde))))
-            lst_actions.append(Action("f:%s-t:R[%s]" % (self.nom, str(self.des - DiceSet(de_garde))), self, lst_movt.copy(), -1))
+            lst_actions.append(Action("f:%s-t:R[%s]" % (self.nom, str(self.des - DiceSet(de_garde))), self, lst_movt.copy(), -1, DiceSet(de_garde)))
             
         # relancer 1 de
         for i in range(len(self.des)):
@@ -135,12 +135,12 @@ class Etat421(Etat):
                 lst_movt = []
                 for e in [etat for etat in lst_etats if DiceSet(*de_garde) in etat.des]:
                     lst_movt.append(Mouvement(e, e.probabilite_avoir_etat(DiceSet(*de_garde))))
-                lst_actions.append(Action("f:%s-t:R[%s]" % (self.nom, str(self.des - DiceSet(*de_garde))), self, lst_movt.copy(), -1))
+                lst_actions.append(Action("f:%s-t:R[%s]" % (self.nom, str(self.des - DiceSet(*de_garde))), self, lst_movt.copy(), -1, DiceSet(*de_garde)))
         
         # tout garder
         lst_movt = []
         lst_movt.append(Mouvement(self, 1))
-        lst_actions.append(Action("f:%s-t:G" % self.nom, self, lst_movt.copy(), 0))
+        lst_actions.append(Action("f:%s-t:G" % self.nom, self, lst_movt.copy(), 0, DiceSet(*self.des)))
         
         
         return lst_actions
