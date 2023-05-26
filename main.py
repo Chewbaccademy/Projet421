@@ -25,16 +25,14 @@ print([str(m) for m in lst_actions])
 env = Environnement(lst_actions)
 
 joueur = Agent(
-                nom="Joe"
+                nom="Bob"
                 , environnement=env
                 , etat_initial=ei
-                , tx_apprentissage=0.9
+                , tx_apprentissage=0.6
                 , tx_exploration=0.9
-                ,facteur_attenuation=0.1)
+                ,facteur_attenuation=0.45)
 score_list = joueur.simuler(1000)
 plt.plot(score_list)
-plt.show()
-c = Counter(joueur.des_gardes)
-plt.bar(c.keys(), c.values())
+plt.title("Scores effectués en 1000 parties")
 plt.show()
 
