@@ -8,6 +8,14 @@ Vous allez dans un premier temps, modéliser et implémenter ce problème/jeu :
 quels sont les variables d'état et les domaines de chaque variable, l'ensemble d'action possible,
 l'oracle qui guidera l'apprentissage (retour d'état s′ de transition et de récompense r pour un couple état, action (s, a))
 
+La premiere variable d'état est celle du score du joueur qui va de 0 points à 800 points 
+Nous avons ensuite le résultat des dés lancés par le joueur. Le domaine de chaque dé est 1, 2, 3, 4, 5, 6.
+
+Nous avons cette ensemble d'actions possibles pour chaque lancé:
+Garder tout les dés
+Relancer 1 seul dé
+Relancer 2 dés
+Relancer tous les dés.
 
 
 Mission 2 : Apprentissage
